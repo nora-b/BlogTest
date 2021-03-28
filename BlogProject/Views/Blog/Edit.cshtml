@@ -1,0 +1,40 @@
+﻿@model BlogProject.ViewModel.BlogViewModel
+
+<h1>Create a new Post</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <form method="post" asp-controller="Blog" asp-action="UpdatePost">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <input type="hidden" asp-for="@Model.Post.PostId" />
+            <div class="form-group">
+                <label asp-for="Post.Title"></label>
+                <input asp-for="Post.Title" class="form-control" />
+                <span asp-validation-for="Post.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Category"></label>
+                @*<input asp-for="Category" class="form-control" />*@
+                <select class="form-control" multiple asp-for="Category">
+                    @foreach (var category in Model.CategoryList)
+                    {
+        <option value="@category">@category</option>}
+                </select>
+
+                <span asp-validation-for="Category" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Post.Photo"></label>
+                <input type="file" asp-for="Post.Photo" class="form-control" />
+                <span asp-validation-for="Post.Photo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Post.Content"></label>
+                <textarea rows="5" asp-for="Post.Content" class="form-control"></textarea>
+                <span asp-validation-for="Post.Content" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Save the post</button>
+        </form>
+    </div>
+</div>
